@@ -104,7 +104,7 @@ export default function EditAutomationPage() {
           {error || 'Automation not found'}
         </h3>
         <Button variant="outline" asChild>
-          <Link href="/automations">
+          <Link href="/">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Automations
           </Link>
@@ -117,7 +117,7 @@ export default function EditAutomationPage() {
     <div className="flex-1 flex flex-col" style={{ height: '100%', minHeight: 0 }}>
       <div className="h-14 border-b border-border bg-card px-4 flex items-center gap-4 flex-shrink-0">
         <Button variant="ghost" size="sm" asChild>
-          <Link href="/automations">
+          <Link href="/">
             <ArrowLeft className="w-4 h-4 mr-1" />
             Back
           </Link>
