@@ -69,7 +69,7 @@ export function TestRunModal({
         <DialogHeader>
           <DialogTitle>Test Run Automation</DialogTitle>
           <DialogDescription>
-            Test "{automationName}" by sending emails to the address below.
+            Test "{automationName}" with your conditions. The system will create a test email with sample data and evaluate your conditions.
           </DialogDescription>
         </DialogHeader>
 
@@ -88,25 +88,39 @@ export function TestRunModal({
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="email">Test Email Address</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="test@example.com"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setError('');
-                }}
-                className="mt-1.5"
-              />
-              {error && (
-                <div className="flex items-center gap-1.5 mt-1.5 text-destructive">
-                  <AlertCircle className="w-4 h-4" />
-                  <span className="text-sm">{error}</span>
+            <div className="space-y-3">
+              <div>
+                <Label htmlFor="email">Test Email Address</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="test@example.com"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setError('');
+                  }}
+                  className="mt-1.5"
+                />
+                {error && (
+                  <div className="flex items-center gap-1.5 mt-1.5 text-destructive">
+                    <AlertCircle className="w-4 h-4" />
+                    <span className="text-sm">{error}</span>
+                  </div>
+                )}
+              </div>
+              
+              <div className="bg-muted/30 rounded-lg p-3 border border-border/30">
+                <p className="text-xs text-muted-foreground font-medium mb-2">📧 Test Email Data:</p>
+                <div className="text-xs space-y-1 font-mono">
+                  <div>Subject: "Test Subject with <span className="text-primary">urgent</span> priority" (if email contains 'urgent')</div>
+                  <div>From: your entered email address</div>
+                  <div>Body: Sample test content</div>
                 </div>
-              )}
+                <p className="text-xs text-success mt-2">
+                  💡 Conditions will evaluate against this test data
+                </p>
+              </div>
             </div>
 
             <div className="flex justify-end gap-3">

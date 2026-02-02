@@ -53,6 +53,24 @@ export const createDelayNode = (position: { x: number; y: number }): FlowNode =>
   },
 });
 
+export const createConditionNode = (position: { x: number; y: number }): FlowNode => ({
+  id: generateNodeId('condition'),
+  type: 'conditionNode',
+  position,
+  data: {
+    type: 'condition',
+    rules: [
+      {
+        id: '1',
+        field: 'subject',
+        operator: 'includes',
+        value: '',
+        joinType: 'AND',
+      },
+    ],
+  },
+});
+
 // Normalize nodes from backend to ensure they have correct structure
 export const normalizeNodes = (nodes: FlowNode[]): FlowNode[] => {
   return nodes.map((node) => {
@@ -71,6 +89,9 @@ export const normalizeNodes = (nodes: FlowNode[]): FlowNode[] => {
           break;
         case 'delay':
           nodeType = 'delayNode';
+          break;
+        case 'condition':
+          nodeType = 'conditionNode';
           break;
         default:
           nodeType = 'default';

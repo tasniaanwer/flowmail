@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Vibrant Primary Colors */
+  --primary: 88 80 236; /* Purple-600 */
+  --primary-foreground: 255 255 255;
+  
+  /* Bright Secondary Colors */
+  --secondary: 236 72 153; /* Pink-500 */
+  --secondary-foreground: 255 255 255;
+  
+  /* Accent Colors */
+  --accent: 59 130 246; /* Blue-500 */
+  --accent-foreground: 255 255 255;
+  
+  /* Success, Warning, Error */
+  --success: 34 197 94; /* Green-500 */
+  --warning: 251 146 60; /* Orange-400 */
+  --destructive: 239 68 68; /* Red-500 */
+  
+  /* Background & Surface Colors */
+  --background: 250 244 255; /* Very light purple */
+  --foreground: 17 24 39; /* Dark gray */
+  --card: 255 255 255;
+  --card-foreground: 17 24 39;
+  --border: 229 231 235; /* Light gray */
+  --input: 255 255 255;
+  --ring: 88 80 236; /* Primary */
+  
+  /* Vibrant Gradients */
+  --gradient-primary: linear-gradient(135deg, rgb(88 80 236) 0%, rgb(139 92 246) 50%, rgb(168 85 247) 100%);
+  --gradient-secondary: linear-gradient(135deg, rgb(236 72 153) 0%, rgb(244 114 182) 50%, rgb(251 146 196) 100%);
+  --gradient-accent: linear-gradient(135deg, rgb(59 130 246) 0%, rgb(96 165 250) 50%, rgb(147 197 253) 100%);
+  --gradient-success: linear-gradient(135deg, rgb(34 197 94) 0%, rgb(74 222 128) 50%, rgb(134 239 172) 100%);
+  --gradient-warm: linear-gradient(135deg, rgb(251 146 60) 0%, rgb(254 215 170) 50%, rgb(254 240 138) 100%);
+  
+  /* Special Effects */
+  --shadow-glow: 0 0 20px rgb(88 80 236 / 0.3);
+  --shadow-colored: 0 4 14px 0 rgb(88 80 236 / 0.15);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-popover: rgb(var(--card));
+  --color-popover-foreground: rgb(var(--card-foreground));
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+  --color-muted: rgb(243 244 246);
+  --color-muted-foreground: rgb(107 114 128);
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-destructive: rgb(var(--destructive));
+  --color-border: rgb(var(--border));
+  --color-input: rgb(var(--input));
+  --color-ring: rgb(var(--ring));
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 17 24 39; /* Dark gray */
+    --foreground: 243 244 246; /* Light gray */
+    --card: 31 41 55; /* Medium gray */
+    --card-foreground: 243 244 246;
+    --border: 55 65 81; /* Medium-light gray */
+    --input: 31 41 55;
+    --muted: 55 65 81;
+    --muted-foreground: 156 163 175;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: var(--font-sans);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  overflow-x: hidden;
+}
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--muted, 243 244 246));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--primary) / 0.8);
+}
+
+/* Selection styling */
+::selection {
+  background: rgb(var(--primary) / 0.2);
+  color: rgb(var(--foreground));
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid rgb(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Smooth animations */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }

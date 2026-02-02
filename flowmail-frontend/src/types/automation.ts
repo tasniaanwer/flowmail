@@ -15,12 +15,26 @@ export interface DelayNodeData {
   [key: string]: unknown;
 }
 
+export interface ConditionRule {
+  id: string;
+  field: string;
+  operator: 'equals' | 'not_equals' | 'includes' | 'ends_with' | 'starts_with';
+  value: string;
+  joinType: 'AND' | 'OR';
+}
+
+export interface ConditionNodeData {
+  type: 'condition';
+  rules: ConditionRule[];
+  [key: string]: unknown;
+}
+
 export interface StartEndNodeData {
   type: 'start' | 'end';
   [key: string]: unknown;
 }
 
-export type FlowNodeData = ActionNodeData | DelayNodeData | StartEndNodeData;
+export type FlowNodeData = ActionNodeData | DelayNodeData | ConditionNodeData | StartEndNodeData;
 
 export type FlowNode = Node<FlowNodeData>;
 

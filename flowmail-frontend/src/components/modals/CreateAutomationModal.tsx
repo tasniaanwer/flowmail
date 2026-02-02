@@ -10,7 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Plus, AlertCircle } from 'lucide-react';
+import { Plus, AlertCircle, Sparkles, Zap } from 'lucide-react';
 
 const nameSchema = z.string().min(1, 'Name is required').max(100, 'Name must be under 100 characters');
 
@@ -69,17 +69,28 @@ export function CreateAutomationModal({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Create New Automation</DialogTitle>
-          <DialogDescription>
-            Give your automation a unique name to get started.
-          </DialogDescription>
+      <DialogContent className="sm:max-w-md border-0 shadow-2xl shadow-primary/20 animate-fade-in">
+        <div className="absolute inset-0 bg-gradient-primary opacity-5 rounded-lg"></div>
+        <DialogHeader className="relative">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center shadow-glow">
+              <Zap className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <DialogTitle className="text-xl bg-gradient-primary bg-clip-text text-transparent">Create New Automation</DialogTitle>
+              <DialogDescription className="text-muted-foreground">
+                Give your vibrant automation a unique name
+              </DialogDescription>
+            </div>
+          </div>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="name">Automation Name</Label>
+        <form onSubmit={handleSubmit} className="space-y-6 relative">
+          <div className="space-y-2">
+            <Label htmlFor="name" className="text-base font-medium flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-primary" />
+              Automation Name
+            </Label>
             <Input
               id="name"
               placeholder="e.g., Welcome Email Sequence"
@@ -88,24 +99,40 @@ export function CreateAutomationModal({
                 setName(e.target.value);
                 setError('');
               }}
-              className="mt-1.5"
+              className="mt-1.5 border-2 border-primary/20 focus:border-primary/50 bg-background/50 backdrop-blur-sm text-base h-11"
               autoFocus
             />
             {error && (
-              <div className="flex items-center gap-1.5 mt-1.5 text-destructive">
+              <div className="flex items-center gap-1.5 mt-2 text-destructive bg-destructive/10 rounded-lg px-3 py-2 border border-destructive/20">
                 <AlertCircle className="w-4 h-4" />
-                <span className="text-sm">{error}</span>
+                <span className="text-sm font-medium">{error}</span>
               </div>
             )}
           </div>
 
-          <div className="flex justify-end gap-3">
-            <Button type="button" variant="outline" onClick={handleClose}>
+          <div className="flex justify-end gap-3 pt-4">
+            <Button 
+              type="button" 
+              variant="outline" 
+              onClick={handleClose}
+              className="border-2 border-muted/20 hover:bg-muted/10"
+            >
               Cancel
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button 
+              type="submit" 
+              disabled={isLoading}
+              className="bg-gradient-primary hover:shadow-glow min-w-[120px]"
+            >
               <Plus className="w-4 h-4 mr-2" />
-              {isLoading ? 'Creating...' : 'Create'}
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Creating...
+                </div>
+              ) : (
+                'Create'
+              )}
             </Button>
           </div>
         </form>

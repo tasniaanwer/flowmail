@@ -1,7 +1,7 @@
-import { Mail, Clock, Save } from 'lucide-react';
+import { Mail, Clock, Save, GitBranch } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { FlowNode } from '@/types/automation';
-import { createActionNode, createDelayNode } from '@/utils/flowUtils';
+import { createActionNode, createDelayNode, createConditionNode } from '@/utils/flowUtils';
 
 interface NodePaletteProps {
   onAddNode: (node: FlowNode) => void;
@@ -17,7 +17,7 @@ export function NodePalette({ onAddNode, onSave, isSaving }: NodePaletteProps) {
         <div className="space-y-2">
           <button
             onClick={() => onAddNode(createActionNode({ x: 0, y: 0 }))}
-            className="w-full flex items-center gap-3 p-3 rounded-lg border border-border bg-background hover:bg-secondary transition-colors text-left group"
+            className="w-full flex items-center gap-3 p-3 rounded-lg border border-border bg-background hover:bg-secondary/10 transition-colors text-left group"
           >
             <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
               <Mail className="w-5 h-5 text-primary" />
@@ -30,7 +30,7 @@ export function NodePalette({ onAddNode, onSave, isSaving }: NodePaletteProps) {
           
           <button
             onClick={() => onAddNode(createDelayNode({ x: 0, y: 0 }))}
-            className="w-full flex items-center gap-3 p-3 rounded-lg border border-border bg-background hover:bg-secondary transition-colors text-left group"
+            className="w-full flex items-center gap-3 p-3 rounded-lg border border-border bg-background hover:bg-warning/10 transition-colors text-left group"
           >
             <div className="w-9 h-9 rounded-lg bg-warning/10 flex items-center justify-center group-hover:bg-warning/20 transition-colors">
               <Clock className="w-5 h-5 text-warning" />
@@ -38,6 +38,19 @@ export function NodePalette({ onAddNode, onSave, isSaving }: NodePaletteProps) {
             <div>
               <p className="text-sm font-medium text-foreground">Delay</p>
               <p className="text-xs text-muted-foreground">Wait before next</p>
+            </div>
+          </button>
+
+          <button
+            onClick={() => onAddNode(createConditionNode({ x: 0, y: 0 }))}
+            className="w-full flex items-center gap-3 p-3 rounded-lg border border-border bg-background hover:bg-warning/10 transition-colors text-left group"
+          >
+            <div className="w-9 h-9 rounded-lg bg-gradient-warm/20 flex items-center justify-center group-hover:bg-gradient-warm/30 transition-colors">
+              <GitBranch className="w-5 h-5 text-warning" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-foreground">Condition</p>
+              <p className="text-xs text-muted-foreground">Split flow based on rules</p>
             </div>
           </button>
         </div>

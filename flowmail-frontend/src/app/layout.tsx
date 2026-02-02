@@ -14,8 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FlowMail",
-  description: "Email automation builder with visual flow editor",
+  title: "FlowMail - Colorful Email Automation",
+  description: "Build beautiful email automations with our vibrant visual flow editor",
+  keywords: ["email", "automation", "flow", "builder", "visual"],
+  authors: [{ name: "FlowMail Team" }],
+  viewport: "width=device-width, initial-scale=1",
+  themeColor: "#5850ec",
 };
 
 export default function RootLayout({
